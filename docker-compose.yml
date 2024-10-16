@@ -1,0 +1,35 @@
+services:
+  database:
+    networks:
+      - poc
+    container_name: mongodb
+    image: mongo:latest
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./.mongodb/data//db:/data/db
+    ports:
+      - ${DATABASE_PORT}:27017
+    expose:
+      - ${DATABASE_PORT}
+  api:
+    depends_on:
+      - database
+    networks:
+      - poc
+    container_name: api
+    build:
+      context: .
+    image: api
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - ./:/code
+      - ./node_modules:/code/node_modules
+    ports:
+      - ${APPLICATION_PORT}:3000
+networks:
+  poc:
+    driver: bridge
