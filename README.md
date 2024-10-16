@@ -16,7 +16,7 @@ REST API using NestJS and Mongoose.
 ## Stack <a name="stack"></a>
 - Stack utilizada na aplicação:
   - [Node.js](https://nodejs.org/)
-  - [NestJS](https://github.com/nestjs/nest)
+  - [NestJS](https://nestjs.com/)
   - [TypeScript](https://www.typescriptlang.org/)
   - [MongoDB](https://www.mongodb.com/)
   - [Mongoose](https://mongoosejs.com/)

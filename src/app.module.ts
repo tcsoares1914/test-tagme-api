@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
 import apiConfig from '@src/config/api.config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { HealthCheckModule } from '@src/health-check/health-check.module';
+import { PicturesModule } from '@src/pictures/pictures.module';
 
-const importedModules = [HealthCheckModule];
+const importedModules = [HealthCheckModule, PicturesModule];
 
 @Module({
   imports: [
