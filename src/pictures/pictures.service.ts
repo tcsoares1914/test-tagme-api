@@ -3,6 +3,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+import { Query as QueryParams } from 'express-serve-static-core';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePictureDto } from '@src/pictures/dto/create-picture.dto';
@@ -37,8 +38,22 @@ export class PicturesService {
   /**
    * List all collection items.
    */
-  async findAll(): Promise<Picture[]> {
-    const pictures = await this.pictureModel.find();
+  async findAll(query: QueryParams): Promise<Picture[]> {
+    const limit = Number(query.limit) || 10;
+    const currentPage = Number(query.page) || 1;
+    const skip = limit * (currentPage - 1);
+    const keyword = query.keyword
+      ? {
+          title: {
+            $regex: query.keyword,
+            $options: 'i',
+          },
+        }
+      : {};
+    const pictures = await this.pictureModel
+      .find({ ...keyword })
+      .limit(limit)
+      .skip(skip);
 
     return pictures;
   }

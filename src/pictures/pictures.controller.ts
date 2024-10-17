@@ -6,7 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
+import { Query as QueryParams } from 'express-serve-static-core';
 import { PicturesService } from '@src/pictures/pictures.service';
 import { CreatePictureDto } from '@src/pictures/dto/create-picture.dto';
 import { UpdatePictureDto } from '@src/pictures/dto/update-picture.dto';
@@ -31,8 +33,8 @@ export class PicturesController {
    * List all collection items.
    */
   @Get()
-  async findAll(): Promise<Picture[]> {
-    return await this.picturesService.findAll();
+  async findAll(@Query() query: QueryParams): Promise<Picture[]> {
+    return await this.picturesService.findAll(query);
   }
 
   /**
