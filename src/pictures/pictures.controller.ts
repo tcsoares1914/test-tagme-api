@@ -33,7 +33,7 @@ export class PicturesController {
    * List all collection items.
    */
   @Get()
-  async findAll(@Query() query: QueryParams): Promise<Picture[]> {
+  async findAll(@Query() query?: QueryParams): Promise<Picture[]> {
     return await this.picturesService.findAll(query);
   }
 

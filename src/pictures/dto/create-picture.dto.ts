@@ -24,6 +24,8 @@ export class CreatePictureDto {
   @IsNotEmpty({
     message: 'O endereço da foto não pode ser vazio.',
   })
-  @IsString()
+  @IsString({
+    message: 'O título deve ser do tipo string.',
+  })
   photo: string;
 }
