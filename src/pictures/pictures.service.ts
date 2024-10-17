@@ -38,7 +38,7 @@ export class PicturesService {
   /**
    * List all collection items.
    */
-  async findAll(query: QueryParams): Promise<Picture[]> {
+  async findAll(query?: QueryParams): Promise<Picture[]> {
     const limit = Number(query.limit) || 10;
     const currentPage = Number(query.page) || 1;
     const skip = limit * (currentPage - 1);
@@ -82,10 +82,6 @@ export class PicturesService {
       id,
       updatePictureDto,
     );
-
-    if (!picture) {
-      throw new NotFoundException('Picture not found!');
-    }
 
     return picture;
   }
